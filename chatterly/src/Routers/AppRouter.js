@@ -1,0 +1,6 @@
+import React from 'react'
+import {Router, Route, Switch, Link, NavLink} from 'react-router-dom'
+import 404 from '../404/404'
+import Login from '../Login/login'
+import JoinRoom from '../JoinRoom/joinroom'
+import ShowRoom from '../ShowRoom/showroom'
