@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {firebase} from '../Firebase/firebase'
 import {connect} from 'react-redux'
 import {startCreateRoom, startJoinRoom} from '../Actions/rooms'
 
-export class JoinRoom extends React.Component {
+export class JoinRoom extends Component {
   onCreateRoom = (e) => {
     e.preventDefault()
     const user = firebas.auth().currentUser
