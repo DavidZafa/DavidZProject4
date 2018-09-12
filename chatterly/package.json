@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "deploy": "^1.0.3",
+    "express": "4.15.4",
     "firebase": "^5.4.2",
+    "history": "4.7.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-redux": "^5.0.7",

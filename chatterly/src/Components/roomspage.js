@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {startSendMessage} from '../Actions/rooms'
-import Messages from '../Messages/messages'
+import Messages from './messages'
 
 
 export class RoomsPage extends Component {

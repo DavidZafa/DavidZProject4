@@ -1,5 +1,5 @@
 import database, {firebase} from '../Firebase/firebase'
-// import {history} from '../routers/AppRouter'
+import {history} from '../Routers/AppRouter'
 
 export const createRoom = ({id, name, people, messages = []}) => ({
   type: 'CREATE_ROOM',

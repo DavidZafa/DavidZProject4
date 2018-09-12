@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route, Redirect} from 'react-router-dom'
-import Header from '../Header/header'
-import ShowRoom from '../ShowRoom/showroom'
+import Header from '../Components/header'
+import ShowRoom from '../Components/showroom'
 
 
 export const LoggedIn = ({

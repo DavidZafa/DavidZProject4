@@ -1,12 +1,21 @@
+// // import React from 'react';
+// // import ReactDOM from 'react-dom';
+// // import './index.css';
+// // import App from './App/App';
+// // import registerServiceWorker from './registerServiceWorker';
+// //
+// // ReactDOM.render(<App />, document.getElementById('root'));
+// // registerServiceWorker();
+//
 // import React from 'react'
 // import ReactDOM from 'react-dom'
 // import {Provider} from 'react-redux'
-// import AppRouter, {history} from '../Routers/approuter'
-// import Store from '../Store/store'
-// import {login, logout} from '../Actions/auth'
-// import {sendMessage} from '../Actions/rooms'
-// import database, {firebase} from '../Firebase/firebase'
-// import {setStartState, clearState} from '../Actions/rooms'
+// import AppRouter, { history } from './Routers/AppRouter';
+// import Store from './Store/store'
+// import {login, logout} from './Actions/auth'
+// import {sendMessage} from './Actions/rooms'
+// import database, {firebase} from './Firebase/firebase'
+// import {setStartState, clearState} from './Actions/rooms'
 //
 // const store = Store()
 // const jsx = (
