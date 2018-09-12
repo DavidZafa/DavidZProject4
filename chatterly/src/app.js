@@ -1,21 +1,13 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App/App';
-// import registerServiceWorker from './registerServiceWorker';
-//
-// ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import AppRouter, { history } from './Routers/AppRouter';
 import Store from './Store/store'
 import {login, logout} from './Actions/auth'
 import {sendMessage} from './Actions/rooms'
 import database, {firebase} from './Firebase/firebase'
-import {setStartState, clearState} from './Actions/rooms'
+import {startListening, setStartState, clearState} from './Actions/rooms'
+import LoadingPage from './Components/loading'
 
 const store = Store()
 const jsx = (
@@ -32,7 +24,6 @@ const renderApp = () => {
   }
 }
 
-ReactDOM.render(document.getElementByID('app'))
 
 firebase.auth().onAuthStateChanged((user) => {
   if(user) {
