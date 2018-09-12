@@ -1,11 +1,11 @@
-import database, {firebase, googleAuthProvider as provider} from '../firebase/firebase'
+import database, {firebase, googleAuthProvider as provider} from '../Firebase/firebase'
 
-export const login = (uid) =({
+export const login = (uid) => ({
   type: 'LOGIN',
-
+  uid
+})
   export const startLogin = () => {
     return () => {
-      return firebase.auth().signInWithPopup(googleAuthProvider)
 
       return firebase.auth().signInWithPopup(provider).then(function(result) {
         var token = result.credential.accessToken
@@ -14,11 +14,11 @@ export const login = (uid) =({
         database.ref('users').once('value', (snapshot) => {
           const users = []
           snapshot.forEach((childSnapshot) => {
-            users.push({childSnapshot.value()})
+            users.push({...childSnapshot.value()})
           })
         })
 
-          if(!users.find((u) => u.id == user.uid)) {
+          if(!user.find((u) => u.id === user.uid)) {
             database.ref('users').push({
               name: user.displayName,
               email: user.email,
@@ -28,12 +28,14 @@ export const login = (uid) =({
             })
           }
         })
+  }
+}
+export const logout = () => ({
+  type: 'LOGOUT'
+})
 
-      }).catch(function(error) {
-        var errorCode = error.errorCode
-        var errorMessage = error.errorMessage
-        var email = error.email
-        var credential = error.credential
-      })
+export const startLogout = () => {
+  return () => {
+    return firebase.auth().signOut();
   }
 }

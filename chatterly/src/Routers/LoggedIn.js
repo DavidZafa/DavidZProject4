@@ -30,4 +30,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.uid
 });
 
-export default connect(mapStateToProps)(Loggedin);
+export default connect(mapStateToProps)(LoggedIn);

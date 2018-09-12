@@ -15,7 +15,7 @@ class Messages extends Component {
     for (var key in messages) {
       const name = <p className = "name">{messages[key].sender.displayName}</p>
       const text = <p className = "message_text">{messages[key].text}</p>
-      a.push(<li className = "list">{name}{time}{text}</li>)
+      a.push(<li className = "list">{name}{text}</li>)
     }
     return a
   }
