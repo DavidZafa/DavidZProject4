@@ -1,17 +1,17 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase'
 
 const config = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
+  apiKey: "AIzaSyDCZiT8mEQFjnAqqLQxQh24iUTpM4mjYkI",
+  authDomain: "chatterly-cb064.firebaseapp.com",
+  databaseURL: "https://chatterly-cb064.firebaseio.com",
+  projectId: "chatterly-cb064",
+  storageBucket: "chatterly-cb064.appspot.com",
+  messagingSenderId: "431496697135"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
 
-const database = firebase.database();
-const googleAuthProvider = new firebase.auth.googleAuthProvider();
+const database = firebase.database()
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 
-export { firebase, goggleAuthProvider, database as default };
+export { firebase, googleAuthProvider, database as default }

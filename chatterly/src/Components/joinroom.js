@@ -6,7 +6,7 @@ import {startCreateRoom, startJoinRoom} from '../Actions/rooms'
 export class JoinRoom extends Component {
   onCreateRoom = (e) => {
     e.preventDefault()
-    const user = firebas.auth().currentUser
+    const user = firebase.auth().currentUser
     if(user) {
       const room = {
         name: e.target.rname.value,

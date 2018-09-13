@@ -1,5 +1,5 @@
-import database, {firebase} from '../firebase/firbase'
-// import {history} from '../routers/AppRouter'
+import database, {firebase} from '../Firebase/firebase'
+import {history} from '../Routers/AppRouter'
 
 export const createRoom = ({id, name, people, messages = []}) => ({
   type: 'CREATE_ROOM',
@@ -18,26 +18,27 @@ export const startCreateRoom = (roomper = {}) => {
     }
     return database.ref('rooms').once('value', (snapshot) => {
       const rooms = []
-      snapshot.forEach(childSnapshot) => {
-        rooms.push({childSnapshot.val()})
+      snapshot.forEach((childSnapshot) => {
+        rooms.push({
+          ...childSnapshot.val()
+        })
       })
       if(!rooms.find((r) => r.name === room.name)) {
         return database.ref('rooms').push(room).then((ref) => {
           return database.ref('rooms/${ref.key}/people').push(roomper.people).then(() => {
-            datbase.ref('users').once(value).then((snapshot) => {
+            database.ref('users').once('value').then((snapshot) => {
               snapshot.forEach((childSnapshot) => {
                 if(childSnapshot.val().uid === roomper.people.id) {
-                  datbase.ref('users/${childSnapshot.key}/rooms').push(ref.key)
+                  database.ref('users/${childSnapshot.key}/rooms').push(ref.key)
                 }
               })
-            })
           })
           dispatch(createRoom({
             id: ref.key,
-              roomper,
+              ...roomper,
               people: [roomper.people]
           }))
-          history.push('/room/${room.name}')
+          this.context.history.push('/room/${room.name}')
         })
       })
     }
@@ -52,7 +53,7 @@ const isAlreadyAdded = (data, id) => {
   return false
 }
 
-export const startJoinRoom = (date = {}) => {
+export const startJoinRoom = (data = {}) => {
   return (dispatch, getState) => {
     const state = getState()
     return database.ref('rooms').once('value', (snapshot) => {
@@ -60,7 +61,7 @@ export const startJoinRoom = (date = {}) => {
       snapshot.forEach((childSnapshot) => {
         rooms.push({
           id: childSnapshot.key,
-          childSnapshot.val()
+          ...childSnapshot.val()
         })
       })
       for(var i = 0; i < rooms.length; i ++){
@@ -73,10 +74,10 @@ export const startJoinRoom = (date = {}) => {
               id: data.id
             }
             return database.ref('rooms/${rooms[i].id}/people').push(person).then((ref) => {
-              databse.ref('users').once('value').then((usersnapshot) => {
-                usersnapshot.forEach((clidhSnapshot) => {
-                  if(childSnapshot.val().uid === data.id) {
-                    databse.ref('users/${childSnapshot.key}/rooms').push(rooms[i].id)
+              database.ref('users').once('value').then((usersnapshot) => {
+                usersnapshot.forEach((childSnapshot) => {
+                  if (childSnapshot.val().uid === data.id) {
+                    database.ref('users/${childSnapshot.key}/rooms').push(rooms[i].id)
                   }
                 })
               })
@@ -85,7 +86,7 @@ export const startJoinRoom = (date = {}) => {
                 id: rooms[i].id,
                 name: rooms[i].name
               }))
-              history.push('room/${data.roomName}')
+              this.context.history.push('room/${data.roomName}')
             })
           }
         }
@@ -97,7 +98,7 @@ export const startJoinRoom = (date = {}) => {
 export const sendMessage = (message, roomName) => ({
   type: 'SEND_MESSAGE',
   message,
-  roomname
+  roomName
 })
 
 export const startSendMessage = (text, roomName) => {
@@ -110,17 +111,17 @@ export const startSendMessage = (text, roomName) => {
         sender: {uid, displayName},
         text
       }
-      return databse.ref('rooms').once('value', (snapshot) => {
+      return database.ref('rooms').once('value', (snapshot) => {
         const rooms = []
         snapshot.forEach((childSnapshot) => {
           rooms.push({
             id: childSnapshot.key,
-            childSnapshot.val()
+            ...childSnapshot.val()
           })
         })
         for(var i = 0; i < rooms.length; i++) {
           if( rooms[i].name === roomName) {
-            return databse.ref('rooms/${rooms[i].id/messages}').push(message)
+            return database.ref('rooms/${rooms[i].id/messages}').push(message)
           }
         }
       })
@@ -140,7 +141,7 @@ export const startListening = () => {
         }, roomName))
         })
       })
-    })
+
   }
 }
 
@@ -156,13 +157,13 @@ export const setStartState = () => {
           rooms.push(childSnapshot.val().rooms)
           rooms = rooms[0]
           for( var key in rooms) {
-            databse.ref('rooms/${rooms[key]}').once('value', (snapshot) => {
+            database.ref('rooms/${rooms[key]}').once('value', (snapshot) => {
               const {name, people, messages} = snapshot.val()
               let peopleArray = [], messagesArray = []
               for(var peopleKey in people) {
                 peopleArray.push(people[peopleKey])
               }
-              for(var messageKey in messags) {
+              for(var messageKey in messages) {
                 messagesArray.push(messages[messageKey])
               }
               dispatch(createRoom({

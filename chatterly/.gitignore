@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 
+public/dist/
 # testing
 /coverage
 

@@ -9,7 +9,7 @@ export const Nah = ({
 }) => (
   <Route {...rest} component = {(props) => (
     isAuthenticated ? (
-      <Redirect = '/join' />
+      <Redirect to = "/join" />
     ) : (
       <Component {...props} />
     )
