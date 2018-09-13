@@ -39,6 +39,14 @@ export class JoinRoom extends Component {
       <input className = "text-input" placeholder = "Room Name" name = "rname"/>
       <button className="buttonjoin">Create</button>
       </form>
+            </div>
+            <div className="box-layout__box--join">
+              <h1 className="box-layout__title">Join a room</h1>
+              <form onSubmit={this.onJoinRoom}>
+              <input className="text-input--join" placeholder="Enter Room name" name="rname" />
+              <button className="button--join">Join</button>
+              </form>
+
       </div>
       </div>
 

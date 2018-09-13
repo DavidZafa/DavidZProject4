@@ -6,7 +6,7 @@ import Messages from './messages'
 
 export class RoomsPage extends Component {
 
-  roomName = this.props.location.pathname.split('/')
+  roomName = this.props.location.pathname.split('/').slice(-1)[0]
 
   onSubmit = (e) => {
     e.preventDefault()
@@ -18,12 +18,12 @@ export class RoomsPage extends Component {
 
   render() {
     return(
-      <div className = "messages">
+      <div className = "box-layout--messages">
       <Messages roomName={this.roomName} />
 
       <form onSubmit={this.onSubmit} id = "message-form">
-      <input type = "text" name = "message" className = "input"/>
-      <button className = "login">Send</button>
+      <input type = "text" name = "message" className = "text-input"/>
+      <button className = "login-button">Send</button>
       </form>
       </div>
     )

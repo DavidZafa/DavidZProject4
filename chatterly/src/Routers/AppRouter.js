@@ -6,7 +6,7 @@ import createHistory from 'history/createBrowserHistory'
 import ShowRoom from '../Components/showroom'
 import RoomsPage from '../Components/roomspage'
 import LoggedIn from './LoggedIn'
-import Nah from './Nah'
+import PublicRoute from './PublicRoute'
 
 export const history = createHistory()
 
@@ -14,11 +14,11 @@ const AppRouter = () => (
   <Router history={history}>
   <div>
   <Switch>
-  <Nah path = "/" component = {Login} exact = {true}/>
+  <PublicRoute path = "/" component = {Login} exact = {true}/>
   <LoggedIn path = "/join" component = {JoinRoom}/>
   <LoggedIn path = "/room/:id" component = {RoomsPage}/>
-  </Switch>
-  </div>
+      </Switch>
+    </div>
   </Router>
 )
 

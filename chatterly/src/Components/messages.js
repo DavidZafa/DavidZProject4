@@ -7,17 +7,18 @@ class Messages extends Component {
 
 
   displayMessages = (messages) => {
-    if(typeof messages == 'string') {
+    if(typeof messages === 'string') {
       return <li>{messages}</li>
     }
 
     let a = []
     for (var key in messages) {
-      const name = <p className = "name">{messages[key].sender.displayName}</p>
+      const name = <p className = "message_name">{messages[key].user}</p>
       const text = <p className = "message_text">{messages[key].text}</p>
-      a.push(<li className = "list">{name}{text}</li>)
+      a.push(<li className = "message">{name}{text}</li>)
     }
     return a
+    console.log(a)
   }
 
   render() {

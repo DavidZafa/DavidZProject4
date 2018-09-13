@@ -13,8 +13,9 @@ export const LoggedIn = ({
   <Route {...rest} component = {(props) => (
     isAuthenticated ? (
       <div>
-      <Header />
       <div className = 'container'>
+      <Header />
+
       <ShowRoom />
       <Component {...props} />
       </div>
