@@ -9,7 +9,8 @@ import {login, logout} from './Actions/auth'
 import {sendMessage} from './Actions/rooms'
 import database, {firebase} from './Firebase/firebase'
 import {startListening, setStartState, clearState} from './Actions/rooms'
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import './index.css'
 const store = Store()
 
 store.dispatch(startListening())

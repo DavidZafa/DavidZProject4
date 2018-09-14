@@ -23,7 +23,7 @@ export class RoomsPage extends Component {
 
       <form onSubmit={this.onSubmit} id = "message-form">
       <input type = "text" name = "message" className = "text-input"/>
-      <button className = "login-button">Send</button>
+      <button className = "button">Send</button>
       </form>
       </div>
     )
@@ -32,6 +32,6 @@ export class RoomsPage extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   startSendMessage: (message, roomName) => dispatch(startSendMessage(message, roomName))
-});
+})
 
-export default connect(undefined, mapDispatchToProps)(RoomsPage);
+export default connect(undefined, mapDispatchToProps)(RoomsPage)

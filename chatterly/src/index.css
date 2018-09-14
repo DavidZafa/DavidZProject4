@@ -2,4 +2,30 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: olive;
+
+}
+
+.messages {
+  border-style: solid;
+  border-color: black;
+  word-wrap: break-word;
+  padding: 10px;
+  margin: 10px;
+  font-size: 18px;
+  color: white;
+  border-redius: 27px;
+}
+
+.header {
+  text-align: center;
+}
+
+
+.container__left {
+  text-align: left;
+}
+
+.join {
+  text-align: center;
 }
