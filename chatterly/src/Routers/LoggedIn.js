@@ -29,6 +29,6 @@ export const LoggedIn = ({
 
 const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.uid
-});
+})
 
-export default connect(mapStateToProps)(LoggedIn);
+export default connect(mapStateToProps)(LoggedIn)
