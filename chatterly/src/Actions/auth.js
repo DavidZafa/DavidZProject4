@@ -27,8 +27,7 @@ export const startLogin = () => {
           })
         }
       })
-
-
+      
     }).catch(function(error) {
       var errorCode = error.code
       var errorMessage = error.message

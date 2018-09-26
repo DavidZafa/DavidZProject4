@@ -1,5 +1,5 @@
-import database, { firebase } from '../Firebase/firebase'
-import { history } from '../Routers/AppRouter'
+import database, { firebase } from '../Firebase/firebase';
+import { history } from '../Routers/AppRouter';
 
 export const createRoom = ({ id, name, people, messages = [] }) => ({
   type: 'CREATE_ROOM',
@@ -11,14 +11,14 @@ export const createRoom = ({ id, name, people, messages = [] }) => ({
   }
 })
 
-
 export const startCreateRoom = (roomper = {}) => {
+  //TODO: Don't allow creation of already created rooms
   return (dispatch, getState) => {
     const room = {
       name: roomper.name
     }
     return database.ref('rooms').once('value', (snapshot) => {
-      const rooms = []
+      const rooms = [];
       snapshot.forEach((childSnapshot) => {
         rooms.push({
           ...childSnapshot.val()
@@ -30,7 +30,7 @@ export const startCreateRoom = (roomper = {}) => {
             database.ref('users').once('value').then((snapshot) => {
               snapshot.forEach((childSnapshot) => {
                 if (childSnapshot.val().uid === roomper.people.id) {
-                  database.ref(`users/${childSnapshot.key}/rooms`).push(ref.key)
+                  database.ref(`users/${childSnapshot.key}/rooms`).push(ref.key);
                 }
               })
             })
@@ -40,7 +40,7 @@ export const startCreateRoom = (roomper = {}) => {
               ...roomper,
               people: [roomper.people]
             }))
-            history.push(`/room/${room.name}`)
+            history.push(`/room/${room.name}`);
 
           })
 
@@ -52,26 +52,26 @@ export const startCreateRoom = (roomper = {}) => {
 
 const isAlreadyAdded = (data, id) => {
   for (var key in data) {
-    if (data[key].id === id) return true
+    if (data[key].id === id) return true;
   }
-  return false
+  return false;
 }
 
 export const startJoinRoom = (data = {}) => {
   return (dispatch, getState) => {
-    const state = getState()
+    const state = getState();
     return database.ref('rooms').once('value', (snapshot) => {
-      const rooms = []
+      const rooms = [];
       snapshot.forEach((childSnapshot) => {
         rooms.push({
           id: childSnapshot.key,
           ...childSnapshot.val()
         })
       })
-      for (var i = 0 i < rooms.length i++) {
+      for (var i = 0; i < rooms.length; i++) {
         if (rooms[i].name === data.roomName) {
           if (isAlreadyAdded(rooms[i].people, data.id)) {
-            return console.log('You are already added to this room')
+            return console.log('You are already added to this room');
           } else {
             const person = {
               name: data.name,
@@ -81,8 +81,8 @@ export const startJoinRoom = (data = {}) => {
               database.ref('users').once('value').then((usersnapshot) => {
                 usersnapshot.forEach((childSnapshot) => {
                   if (childSnapshot.val().uid === data.id) {
-                    console.log(snapshot)
-                    database.ref(`users/${childSnapshot.key}/rooms`).push(rooms[i].id)
+                    console.log(snapshot);
+                    database.ref(`users/${childSnapshot.key}/rooms`).push(rooms[i].id);
                   }
                 })
               })
@@ -91,13 +91,12 @@ export const startJoinRoom = (data = {}) => {
                 id: rooms[i].id,
                 name: rooms[i].name
               }))
-
-              history.push(`room/${data.roomName}`)
+              history.push(`room/${data.roomName}`);
             })
           }
         }
       }
-      console.log('Room not found!')
+      console.log('Room not found!');
     })
   }
 }
@@ -110,25 +109,25 @@ export const sendMessage = (message, roomName) => ({
 
 export const startSendMessage = (text, roomName) => {
   return (dispatch, getState) => {
-    const user = firebase.auth().currentUser
+    const user = firebase.auth().currentUser;
     if (user) {
-      const uid = user.uid
-      const displayName = user.displayName
+      const uid = user.uid;
+      const displayName = user.displayName;
       const message = {
         sender: { uid, displayName },
         text,
       }
       return database.ref('rooms').once('value', (snapshot) => {
-        const rooms = []
+        const rooms = [];
         snapshot.forEach((childSnapshot) => {
           rooms.push({
             id: childSnapshot.key,
             ...childSnapshot.val()
           })
         })
-        for (var i = 0 i < rooms.length i++) {
+        for (var i = 0; i < rooms.length; i++) {
           if (rooms[i].name === roomName) {
-            return database.ref(`rooms/${rooms[i].id}/messages`).push(message)
+            return database.ref(`rooms/${rooms[i].id}/messages`).push(message);
           }
         }
       })
@@ -141,14 +140,14 @@ export const startSendMessage = (text, roomName) => {
 export const startListening = () => {
   return (dispatch, getState) => {
     return database.ref('rooms').on('child_added', (snapshot) => {
-      // console.log(snapshot.val())
-      const roomName = snapshot.val().name
+      // console.log(snapshot.val());
+      const roomName = snapshot.val().name;
       return snapshot.ref.child('messages').on('child_added', (msgSnapshot) => {
-        const message = msgSnapshot.val()
+        const message = msgSnapshot.val();
         dispatch(sendMessage({
           ...message,
           id: snapshot.key
-        }, roomName))
+        }, roomName));
       })
     })
   }
@@ -157,26 +156,25 @@ export const startListening = () => {
 
 export const setStartState = () => {
   return (dispatch, getState) => {
-
-      const user = firebase.auth().currentUser
+      const user = firebase.auth().currentUser;
       if (user) {
-        const uid = user.uid
-        let rooms = []
+        const uid = user.uid;
+        let rooms = [];
         database.ref('users').once('value', (snapshot) => {
           snapshot.forEach((childSnapshot) => {
             if (childSnapshot.val().uid === uid) {
-              rooms.push(childSnapshot.val().rooms)
-              rooms = rooms[0]
+              rooms.push(childSnapshot.val().rooms);
+              rooms = rooms[0];
               for (var key in rooms) {
-                // console.log(rooms[key])
+                // console.log(rooms[key]);
                 database.ref(`rooms/${rooms[key]}`).once('value', (snapshot) => {
-                  const { name, people, messages } = snapshot.val()
-                  let peopleArray = [], messagesArray = []
+                  const { name, people, messages } = snapshot.val();
+                  let peopleArray = [], messagesArray = [];
                   for (var peopleKey in people) {
-                    peopleArray.push(people[peopleKey])
+                    peopleArray.push(people[peopleKey]);
                   }
                   for (var messagesKey in messages) {
-                    messagesArray.push(messages[messagesKey])
+                    messagesArray.push(messages[messagesKey]);
                   }
                   dispatch(createRoom({
                     id: rooms[key],
@@ -190,9 +188,7 @@ export const setStartState = () => {
           })
         })
       }
-
-
-  }
+    }
 }
 
 export const clearState = ({

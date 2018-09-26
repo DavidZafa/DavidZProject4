@@ -11,6 +11,7 @@ import database, {firebase} from './Firebase/firebase'
 import {startListening, setStartState, clearState} from './Actions/rooms'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
+
 const store = Store()
 
 store.dispatch(startListening())
@@ -21,10 +22,7 @@ ReactDOM.render(<Provider store={store}>
     <AppRouter />
     </Provider>,
     document.getElementById('app'))
-
 }
-
-
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {

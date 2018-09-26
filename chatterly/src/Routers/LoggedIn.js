@@ -14,10 +14,10 @@ export const LoggedIn = ({
     isAuthenticated ? (
       <div>
       <div className = 'container'>
-      <Header />
+        <Header />
 
-      <ShowRoom />
-      <Component {...props} />
+        <ShowRoom />
+        <Component {...props} />
       </div>
       </div>
     ) : (

@@ -24,13 +24,12 @@ class Messages extends Component {
   render() {
     return (
       <div className = "messages">
-      <ul>{this.displayMessages(this.props.messages)}
-      </ul>
+        <ul>{this.displayMessages(this.props.messages)}
+        </ul>
       </div>
     )
   }
 }
-
 
 const mapStateToProps = (state, props) => ({
   messages: selectMessages(state.rooms, props.roomName)

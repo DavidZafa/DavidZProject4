@@ -7,7 +7,7 @@ const config = {
   projectId: "chatterly-cb064",
   storageBucket: "chatterly-cb064.appspot.com",
   messagingSenderId: "431496697135"
-};
+}
 
 firebase.initializeApp(config)
 

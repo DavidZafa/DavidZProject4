@@ -19,12 +19,12 @@ export class RoomsPage extends Component {
   render() {
     return(
       <div className = "box-layout--messages">
-      <Messages roomName={this.roomName} />
+        <Messages roomName={this.roomName} />
 
-      <form onSubmit={this.onSubmit} id = "message-form">
-      <input type = "text" name = "message" className = "text-input"/>
-      <button className = "button">Send</button>
-      </form>
+        <form onSubmit={this.onSubmit} id = "message-form">
+          <input type = "text" name = "message" className = "text-input"/>
+          <button className = "button">Send</button>
+        </form>
       </div>
     )
   }

@@ -34,10 +34,10 @@ export class JoinRoom extends Component {
     return (
       <div className="join">
       <div className="join2">
-      <h1 className="title">Create Room</h1>
-      <form onSubmit={this.onCreateRoom}>
-      <input className = "text-input" placeholder = "Room Name" name = "rname"/>
-      <button className="buttonjoin">Create</button>
+        <h1 className="title">Create Room</h1>
+        <form onSubmit={this.onCreateRoom}>
+        <input className = "text-input" placeholder = "Room Name" name = "rname"/>
+        <button className="buttonjoin">Create</button>
       </form>
             </div>
             <div className="box-layout__box--join">
